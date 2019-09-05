@@ -180,7 +180,15 @@ let selector = $('.selector');
 // You can remove one or more data
 selector.removeData('value', 'version');
 ```
+
+#### Data exists
+```javascript
+let selector    = $('.selector'),
+    exists      = selector.dataExists('value'); // return boolean value
+
+console.log(exists);
+```
 Result
-```html
-<div></div>
+```javascript
+true
 ```
