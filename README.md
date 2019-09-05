@@ -3,6 +3,88 @@
 A javascript Library for General purposes
 
 ___
+## Global functions
+
+#### Type data
+```javascript
+let arrayType = [1, 2, 3, 4, 5, 6],
+    objectType= {name: 'JS', version: '1.0', active: true},
+    stringType= "Hello, World!",
+    numberType= 120;
+
+console.log( typeOf(arrayType) ); // Return: array
+console.log( typeOf(objectType) ); // Return: object
+console.log( typeOf(stringType) ); // Return: string
+console.log( typeOf(numberType) ); // Return: number
+```
+
+#### Verify html object
+```javascript
+let bodyHtml    = document.body,
+    arrayType   = [1, 2, 3, 4],
+    objectType  = {};
+
+console.log( isHtml(bodyHtml) ); // Return: true
+console.log( isHtml(arrayType) ); // Return: false
+console.log( isHtml(objectType) ); // Return: false
+```
+
+#### Verify window object
+
+Verify if object is type window.<br>
+This function is used into another function from this library.
+```javascript
+let anyType = 1;
+
+console.log( isWindow(anyType) ); // Return: false
+console.log( isWindow(window) ); // Return: true
+```
+
+#### Get Window
+
+Return node window
+```javascript
+let node = document.documentElement,
+    other = $(".node");
+
+console.log( getWindow(node) ); // Return: [Object Window]
+console.log( getWindow(other) ); // Return: false
+```
+
+#### Offset node element
+```javascript
+let nodeOffset = $(".node");
+
+
+console.log( offset(nodeOffset) ); // Return: { top: 0, left: 0 }
+```
+
+#### Get json parsed
+```javascript
+let object = {name: 'JS', version: '1.0', status: true};
+
+console.log( objToJson(object) );
+```
+Result
+```json
+{
+    "name": "JS",
+    "version": "1.0",
+    "status": true
+}
+```
+
+## Strings functions
+
+#### Verify json
+```javascript
+let stringJson = "{\"name\": \"JS\", \"version\": \"1.0\", \"status\": true}",
+    anyString = "Hello, How are you?";
+
+console.log( stringJson.isJson() ); // Return: true
+console.log( anyString.isJson() ); // Return: false
+```
+
 ## Selectors
 ```javascript
 // Single selector
@@ -188,7 +270,11 @@ let selector    = $('.selector'),
 
 console.log(exists);
 ```
-Result
+
+#### Get data
 ```javascript
-true
+let selector    = $('.selector'),
+    dataValue   = selector.getData('version');
+
+console.log(dataValue); // Return string data if exists or null if not.
 ```
