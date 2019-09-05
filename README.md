@@ -15,8 +15,8 @@ let multipleSelector = $$('.selectors');
 
 #### CSS styles
 ```javascript
-let selector = $('.selector');
-let multiple = $$('.multipleSelectors');
+let selector = $('.selector'); // like document.querySelector
+let multiple = $$('.multipleSelectors'); // like document.querySelectorAll
 
 // Apply css styles for one selector
 selector.css({
