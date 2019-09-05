@@ -36,6 +36,8 @@ multiple.css({
 ```
 
 ## Attributes
+
+#### Set attributes
 ```javascript
 let selector = $('.selector');
 
@@ -50,6 +52,26 @@ selector.setAttributes({
 
 // Result
 // <input type='text' class='container modal direction' value='value attribute' data-custom='custom-data' style=''>
+```
+
+#### Remove attributes
+```javascript
+let selector = $('selector');
+
+// Delete node attributes
+// You can use one or more arguments
+selector.removeAttributes('style', 'type', 'class', 'value');
+```
+
+#### Remove all attributes
+```javascript
+let selector = $('selector');
+
+// Remove all attributes
+selector.purgeAttributes();
+// You can use string arguments for save one or more attributes
+selector.purgeAttributes('class', 'id');
+// All attributes are removed, only those specified in the function's arguments are maintained.
 ```
 
 ## Class Attribute
