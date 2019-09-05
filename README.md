@@ -3,20 +3,20 @@
 A javascript Library for General purposes
 
 ___
-#### Selectors
+## Selectors
 ```javascript
 // Single selector
-let classSelector   = $('.selector');
-let idSelector      = $('#selector');
+let classSelector   = $('.selector'); // like document.querySelector
+let idSelector      = $('#selector'); 
 
 // Multiple selectors
-let multipleSelector = $$('.selectors');
+let multipleSelector = $$('.selectors'); // like document.querySelectorAll
 ```
 
-#### CSS styles
+## CSS styles
 ```javascript
-let selector = $('.selector'); // like document.querySelector
-let multiple = $$('.multipleSelectors'); // like document.querySelectorAll
+let selector = $('.selector');
+let multiple = $$('.multipleSelectors');
 
 // Apply css styles for one selector
 selector.css({
@@ -35,7 +35,7 @@ multiple.css({
 });
 ```
 
-#### Attributes
+## Attributes
 ```javascript
 let selector = $('.selector');
 
@@ -50,4 +50,39 @@ selector.setAttributes({
 
 // Result
 // <input type='text' class='container modal direction' value='value attribute' data-custom='custom-data' style=''>
+```
+
+## Class Attribute
+
+#### Add class
+```javascript
+let selector = $('selector');
+
+// Add class
+selector.addClass('container');
+// Multiple classes
+selector.addClass('container', 'modal', 'custom', 'chip');
+```
+
+#### Quit class
+```javascript
+let selector = $('selector');
+
+// Single mode
+selector.removeClass('container');
+// Multiple mode
+selector.removeClass('container', 'modal', 'custom', 'chip');
+```
+
+#### Toggle class
+```javascript
+let selector = $('selector');
+let button = $('#ClickButton');
+
+button.on('click', () => {
+    // Single toggle
+    selector.toggleClass('container');
+    // multiple toggle
+    selector.toggleClass('container', 'modal', 'custom', 'chip');
+});
 ```

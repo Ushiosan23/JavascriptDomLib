@@ -246,6 +246,16 @@
 	};
 	
 	/**
+	 * Verify if class attribute exists in node
+	 * @param className
+	 * @returns {boolean}
+	 */
+	Element.prototype.classExist = function(className) {
+		let localClasses = Array.from(this.classList);
+		return localClasses.indexOf(className) !== -1;
+	};
+	
+	/**
 	 * Toggle multiple classes. If class exists remove class, but if not exists add the class.
 	 * @param classNames
 	 * @returns {Element}
