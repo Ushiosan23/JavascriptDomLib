@@ -4,9 +4,9 @@
 	//                      WINDOW
 	// ---------------------------------------------------
 	
-	w.on    = w.addEventListener.bind(w);   // Like addEventListener
-	w.$     = d.querySelector.bind(d);      // Like document.querySelector
-	w.$$    = d.querySelectorAll.bind(d);   // Like document.querySelectorAll
+	w.on = w.addEventListener.bind(w);   // Like addEventListener
+	w.$ = d.querySelector.bind(d);      // Like document.querySelector
+	w.$$ = d.querySelectorAll.bind(d);   // Like document.querySelectorAll
 	
 	/**
 	 * Get type var in lower case.
@@ -16,7 +16,7 @@
 	 * @example typeOf({}) => object
 	 * @example typeOf(true) => boolean
 	 */
-	w.typeOf    = obj => ({}).toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLocaleLowerCase();
+	w.typeOf = obj => ({}).toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLocaleLowerCase();
 	
 	/**
 	 * Verify if object is html
@@ -25,14 +25,14 @@
 	 * @example isHtml($("body")) => true
 	 * @example isHtml([]) => false
 	 */
-	w.isHtml    = obj => /^html([\w]*)element/.test(typeOf(obj));
+	w.isHtml = obj => /^html([\w]*)element/.test(typeOf(obj));
 	
 	/**
 	 * Verify if object is window.
 	 * @param obj
 	 * @returns {boolean}
 	 */
-	w.isWindow  = obj => obj !== null && obj === obj.window;
+	w.isWindow = obj => obj !== null && obj === obj.window;
 	
 	/**
 	 * Get object window.
@@ -48,7 +48,7 @@
 	 * @example offset($("body")) => {top: ##, left: ##}
 	 * @example offset([]) => null
 	 */
-	w.offset    = obj => {
+	w.offset = obj => {
 		if (!isHtml(obj))
 			return null;
 		
@@ -75,11 +75,20 @@
 	 * @returns {string|null}
 	 */
 	w.objToJson = obj => {
-		if ( typeof obj !== 'object')
+		if (typeof obj !== 'object')
 			return null;
 		
 		return JSON.stringify(obj, null, 4);
 	};
+	
+	/**
+	 * Check if object is null
+	 *
+	 * @param obj
+	 * @param replace
+	 * @returns {boolean}
+	 */
+	w.isNull = (obj, replace = null) => obj === null ? replace : obj;
 	
 	// ---------------------------------------------------
 	//                      STRING
@@ -112,7 +121,7 @@
 	 * @param radix
 	 * @returns {number}
 	 */
-	String.prototype.toInt = function (radix=null) {
+	String.prototype.toInt = function (radix = null) {
 		return parseInt(this, radix);
 	};
 	
@@ -129,7 +138,7 @@
 	 * @example (120).radix(12) => a0 (hexadecimal)
 	 * @example (120).radix(0) => error
 	 */
-	Number.prototype.radix = function (radix=null) {
+	Number.prototype.radix = function (radix = null) {
 		return this.toString(radix);
 	};
 	
@@ -160,7 +169,7 @@
 	 * @param styles
 	 * @returns {Element}
 	 */
-	Element.prototype.css = function (styles=null) {
+	Element.prototype.css = function (styles = null) {
 		if (typeOf(styles) !== 'object')
 			return this;
 		
@@ -168,7 +177,7 @@
 		
 		for (let style in styles) {
 			for (let local in defaultStyles) {
-				if ( style === local )
+				if (style === local)
 					this.style[local] = styles[local];
 			}
 		}
@@ -185,7 +194,7 @@
 		let defaultStyles = window.getComputedStyle(this);
 		
 		styles.forEach(style => {
-			if ( style in defaultStyles )
+			if (style in defaultStyles)
 				this.style[style] = null;
 		});
 		
@@ -197,13 +206,13 @@
 	 * @param styleName
 	 * @returns {null|string|CSSStyleDeclaration}
 	 */
-	Element.prototype.getStyle = function (styleName=null) {
+	Element.prototype.getStyle = function (styleName = null) {
 		let defaultStyles = window.getComputedStyle(this);
 		
-		if ( styleName === null )
+		if (styleName === null)
 			return defaultStyles;
 		
-		if ( styleName in defaultStyles )
+		if (styleName in defaultStyles)
 			return defaultStyles[styleName];
 		
 		return null;
@@ -218,7 +227,7 @@
 		let localClasses = Array.from(this.classList);
 		
 		classNames.forEach(nodeClass => {
-			if ( localClasses.indexOf(nodeClass) === -1 )
+			if (localClasses.indexOf(nodeClass) === -1)
 				this.classList.add(nodeClass);
 		});
 		
@@ -235,7 +244,7 @@
 		let localClasses = Array.from(this.classList);
 		
 		classNames.forEach(nodeClass => {
-			if ( localClasses.indexOf(nodeClass) !== -1)
+			if (localClasses.indexOf(nodeClass) !== -1)
 				this.classList.remove(nodeClass);
 		});
 		
@@ -250,7 +259,7 @@
 	 * @param className
 	 * @returns {boolean}
 	 */
-	Element.prototype.classExist = function(className) {
+	Element.prototype.classExist = function (className) {
 		let localClasses = Array.from(this.classList);
 		return localClasses.indexOf(className) !== -1;
 	};
@@ -264,7 +273,7 @@
 		let localClasses = Array.from(this.classList);
 		
 		classNames.forEach(nodeClass => {
-			if ( localClasses.indexOf(nodeClass) === -1 )
+			if (localClasses.indexOf(nodeClass) === -1)
 				this.classList.add(nodeClass);
 			else
 				this.classList.remove(nodeClass);
@@ -282,12 +291,12 @@
 	 * @returns {Element}
 	 * @example $("body").setAttributes({class: "container body example", "data-type": 9})
 	 */
-	Element.prototype.setAttributes = function (attributes=null) {
+	Element.prototype.setAttributes = function (attributes = null) {
 		if (typeOf(attributes) !== 'object' || attributes === null)
 			return this;
 		
-		for ( let attr in attributes ) {
-			if ( attr === 'style' || attr === 'css')
+		for (let attr in attributes) {
+			if (attr === 'style' || attr === 'css')
 				this.css(attributes[attr]);
 			else
 				this.setAttribute(attr, attributes[attr]);
@@ -321,10 +330,10 @@
 	 */
 	Element.prototype.purgeAttributes = function (...saveValues) {
 		let localAttributes = this.attributes,
-			arrAttributes   = Array.from(localAttributes);
+			arrAttributes = Array.from(localAttributes);
 		
 		arrAttributes.forEach(objAttribute => {
-			if ( saveValues.indexOf(objAttribute.name) === -1)
+			if (saveValues.indexOf(objAttribute.name) === -1)
 				this.removeAttribute(objAttribute.name);
 		});
 		
@@ -337,8 +346,23 @@
 	 * @returns {Element}
 	 */
 	Element.prototype.insertInto = function (node) {
-		if ( isHtml(node) )
+		if (isHtml(node))
 			node.appendChild(this);
+		
+		return this;
+	};
+	
+	/**
+	 * Remove all children nodes inside them.
+	 *
+	 * @returns {Element}
+	 */
+	Element.prototype.clearContent = function () {
+		let nodes = Array.from(this.children);
+		
+		nodes.forEach(el => {
+			el.remove();
+		});
 		
 		return this;
 	};
@@ -349,7 +373,7 @@
 	 * @returns {Element}
 	 * @example $("body").setData({type: 9}) => <body data-type="9" />
 	 */
-	Element.prototype.setData = function (obj=null) {
+	Element.prototype.setData = function (obj = null) {
 		if (typeOf(obj) !== 'object' || obj === null)
 			return this;
 		
@@ -389,7 +413,7 @@
 	 * @returns {string | undefined|null}
 	 */
 	Element.prototype.getData = function (dataName) {
-		if ( this.dataExists(dataName) )
+		if (this.dataExists(dataName))
 			return this.dataset[dataName];
 		
 		return null;
@@ -401,7 +425,7 @@
 	 * @param listener
 	 * @param options
 	 */
-	Element.prototype.on = function (type, listener, options=false) {
+	Element.prototype.on = function (type, listener, options = false) {
 		this.addEventListener(type, listener, options);
 		return this;
 	};
@@ -415,7 +439,7 @@
 	 * @param styles
 	 * @returns {NodeList}
 	 */
-	NodeList.prototype.css = function (styles=null) {
+	NodeList.prototype.css = function (styles = null) {
 		this.forEach(node => {
 			node.css(styles);
 		});
@@ -428,7 +452,7 @@
 	 * @param attributes
 	 * @returns {NodeList}
 	 */
-	NodeList.prototype.setAttributes = function (attributes=null) {
+	NodeList.prototype.setAttributes = function (attributes = null) {
 		this.forEach(node => {
 			node.setAttributes(attributes);
 		});
@@ -443,7 +467,7 @@
 	 * @param options
 	 * @returns {NodeList}
 	 */
-	NodeList.prototype.on = function (type, listener, options=false) {
+	NodeList.prototype.on = function (type, listener, options = false) {
 		this.forEach(node => {
 			node.on(type, listener, options);
 		});
@@ -465,18 +489,18 @@
 	 * @example document.createCustomElement("div") => <div />
 	 * * @example document.createCustomElement("canvas", {attr: {width: 120, height: 120}}) => <canvas width="120" height="120"/>
 	 */
-	Document.prototype.createCustomElement = function (name, options=null) {
-		let nameN   = name.trim(),
-			node    = document.createElement(nameN);
+	Document.prototype.createCustomElement = function (name, options = null) {
+		let nameN = name.trim(),
+			node = document.createElement(nameN);
 		
 		if (typeOf(options) !== 'object' || options === null)
 			return node;
 		
-		let css     = options.css || null,
-			attr    = options.attr || null,
-			into    = options.into || null,
-			inText  = options.innerText || null,
-			inHtml  = options.innerHTML || null;
+		let css = options.css || null,
+			attr = options.attr || null,
+			into = options.into || null,
+			inText = options.innerText || null,
+			inHtml = options.innerHTML || null;
 		
 		if (css !== null) node.css(css);
 		if (attr !== null) node.setAttributes(attr);
@@ -488,4 +512,4 @@
 	}
 	
 	
-}) (window, document);
+})(window, document);
