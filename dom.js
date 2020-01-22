@@ -90,6 +90,20 @@
 	 */
 	w.isNull = (obj, replace = null) => obj === null ? replace : obj;
 	
+	/**
+	 * Check if object has property
+	 *
+	 * @param obj
+	 * @param property
+	 * @returns {null|boolean}
+	 */
+	w.hasProperty = (obj, property) => {
+		if (typeOf(obj) !== 'object')
+			return null;
+		
+		return property in obj;
+	};
+	
 	// ---------------------------------------------------
 	//                      STRING
 	// ---------------------------------------------------
