@@ -1,2 +1,3 @@
 .idea
 .idea/*
+**/[a-z]-dist.js
