@@ -130,7 +130,8 @@
      */
     w.getCookie = name => {
         // Decoding cookie.
-        let cookieDecode = decodeURIComponent(document.cookie),
+        let cookieName = `${name}=`,
+            cookieDecode = decodeURIComponent(document.cookie),
             cookieList = cookieDecode.split(';');
 
         // Iterate cookies.
@@ -141,8 +142,8 @@
                 rawCookie = rawCookie.substring(1);
             }
             // Check if cookie exists
-            if (rawCookie.indexOf(`${name}=`) == 0) {
-                return rawCookie.substring(name.length, rawCookie.length);
+            if (rawCookie.indexOf(cookieName) == 0) {
+                return rawCookie.substring(cookieName.length, rawCookie.length);
             }
         }
         // Return null if cookie not exists.
